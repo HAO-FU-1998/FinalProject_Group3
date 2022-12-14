@@ -1,0 +1,28 @@
+sudo mn -c
+
+./Apps/karaf-0.8.4/bin/karaf
+
+./Apps/Postman/Postman
+
+sudo mn --topo=tree,2,2 --controller=remote,ip=127.0.0.1,port=6633 --switch ovsk,protocols=OpenFlow13
+
+sudo ovs-ofctl -O OpenFlow13 dump-flows s2
+
+
+in mininet:
+
+pingall
+
+h1 ping h2
+
+iperf h4 h1
+
+iperf h3 h1
+
+
+
+python3 odl.py
+
+python3 test.py
+
+sudo ovs-ofctl -O OpenFlow13 dump-flows s3
